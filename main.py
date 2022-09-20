@@ -4,6 +4,7 @@ from command import get_command
 
 listener = sr.Recognizer()
 
+
 def main():
     speak("Hello!")
 
@@ -11,7 +12,8 @@ def main():
         with sr.Microphone() as source:
             voice = listener.listen(source)
         command = listener.recognize_google(voice)
-        get_command(command)
+        if not ("stop the program" in command):
+            get_command(command)
     except sr.RequestError:
         speak("API unavailable")
     except sr.UnknownValueError:
